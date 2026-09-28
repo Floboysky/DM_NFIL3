@@ -33,3 +33,5 @@ echo -e "ri 1-16\nname 17 Ligand\nri 17-365\nname 18 Receptor\nq" | gmx make_ndx
 # Don't forget to put mmpbsa.in, md_0_1.tpr, md_0_1_noPBC.xtc, index.ndx, topol.top with topol_Protein_chain_A.itp and topol_Protein_chain_B.itp in the same directory as this script before running it!
 # Run the gmx_MMPBSA command
 gmx_MMPBSA -O -i mmpbsa.in -cs md_0_1.tpr -ct md_0_1_noPBC.xtc -ci index.ndx -cg 18 17 -cp topol.top -o FINAL_RESULTS_MMPBSA.dat -do DECOMP_RESULTS.dat -nogui
+
+echo -e "\nBinding energy analysis completed!"

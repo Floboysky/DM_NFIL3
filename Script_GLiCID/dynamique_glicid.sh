@@ -20,38 +20,38 @@
 # Command to run:
 module load guix
 
-# Modèle pour la dynamique
+# Modèle pour la dynamique moléculaire
 dynamique_all="$1"
 dynamique=${dynamique_all/%.pdb/}
 
-# Si besoin on supprime toutes les molécules d'eaux et d'ions du modèle
+# If necessary, we remove all water molecules and ions from the model
 grep -v HETATM $dynamique.pdb > new_$dynamique.pdb
 
-# On convertit le fichier PDB en GMX et on y ajoute un champ de force
+# Convert the PDB file to GMX and add a force field
 gmx pdb2gmx -f new_$dynamique.pdb -o processed_$dynamique.gro -water spce <<< "15"
-# 6 = AMBER99SB-ILDN ou 8 = CHARMM27 ou 14 = GROMOS96 54a7 ou 15 = OPLS-AA/L
+# 6 = AMBER99SB-ILDN or 8 = CHARMM27 or 14 = GROMOS96 54a7 or 15 = OPLS-AA/L
 
-# Définir l'espace de simulation (cubic/hexagonal/dodecahedron/octahedron)
+# Define the simulation space (cubic/hexagonal/dodecahedron/octahedron)
 gmx editconf -f processed_$dynamique.gro -o box_$dynamique.gro -c -d 4.0 -bt dodecahedron
 
-# Rajout du solvant (H2O)
+# Add the solvent (H2O)
 gmx solvate -cp box_$dynamique.gro -cs spc216.gro -o solvate_$dynamique.gro -p topol.top
 
-# Ajout d'ions
+# Add ions
 gmx grompp -f ions.mdp -c solvate_$dynamique.gro -p topol.top -o ions.tpr
 gmx genion -s ions.tpr -o solvate_ions_$dynamique.gro -p topol.top -neutral <<< "13"
 # 13 = SOL
 
-# Minimum d'énergie
+# Minimum Energy
 gmx grompp -f em.mdp -c solvate_ions_$dynamique.gro -p topol.top -o em.tpr
 gmx mdrun -v -deffnm em
 
-# Equilibrage thermodynamique
-# 1er étape
+# Thermodynamic equilibrium
+# first step
 gmx grompp -f nvt.mdp -c em.gro -r em.gro -p topol.top -o nvt.tpr
 gmx mdrun -v -deffnm nvt
 
-# 2e étape
+# second step
 gmx grompp -f npt.mdp -c nvt.gro -r nvt.gro -t nvt.cpt -p topol.top -o npt.tpr
 gmx mdrun -v -deffnm npt
 
@@ -59,5 +59,5 @@ gmx mdrun -v -deffnm npt
 gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md_0_1.tpr
 gmx mdrun -v -deffnm md_0_1
 
-echo -e "\ndynamique terminée!"
-# Visualiser la simulation avec les fichiers md_0_1.gro et md_0_1.xtc...
+echo -e "\nMolecular dynamics simulation completed!"
+# View the simulation with the files md_0_1.gro and md_0_1.xtc
