@@ -14,7 +14,7 @@ First, make sure you have installed GROMACS and gmx_MMBPSA on your GLiCID sessio
 - The scripts in "Script_GLiCID" are used to launch the DM on the GLiCID server:
     - `dynamique_glicid.sh`: Runs the DM from a PDB file.
     - `energy_binding.sh:` Runs the `gmx_MMPBSA` command to calculate the change in ΔG.
-    - `analyse_md.sh`: Calculates the RMSD, RMSF, Rg, and PCA, and places all the result files in a folder named "Files".
+    - `analyse_md.sh`: Calculates the RMSD, RMSF, Rg, and PCA, and places all the result files in a folder named "Fichier".
 
 .mdp scripts are used for DM settings, and the .in script is used for the MM_PBSA analysis settings.
 
