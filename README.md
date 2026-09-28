@@ -1,7 +1,7 @@
-Dépôt GitHub pour l'analyse de la DM d'un peptide avec le domaine WD40 de TBL1R:
+GitHub repository for analyzing the structure of a peptide with the WD40 domain of TBL1R:
 
 ## Installation
-Dans un terminal Anaconda lancer les lignes de commandes suivantes:
+In an Anaconda terminal, run the following command lines:
 
 ```bash
 git clone https://github.com/Floboysky/DM_NFIL3.git
@@ -10,15 +10,15 @@ conda activate analyse_md
 ```
 
 ## Description and Usage
-- Les scripts servent à lancer la DM dans le serveur GLiCID
-Au préalable bien s'assurer d'avoir installer GROMACS et gmx_MMBPSA sur sa session GLiCID (voir doc:[GLiCID](https://doc.glicid.fr/GLiCID-PUBLIC/main/)).
-    -`dynamique_glicid.sh`: Lancement de la DM à partir d'un fichier PDB.
-    -`energy_binding.sh:` Lance la commande `gmx_MMPBSA` pour le calcul de l'évolution du ΔG.
-    -`analyse_md.sh`: Calcul le RMSD, RMSF, Rg, PCA et met tous les fichiers de résultats dans un dossier "Fichiers".
+First, make sure you have installed GROMACS and gmx_MMBPSA on your GLiCID session (see documentation: [GLiCID](https://doc.glicid.fr/GLiCID-PUBLIC/main/)).
+- The scripts in "Script_GLiCID" are used to launch the DM on the GLiCID server:
+    - `dynamique_glicid.sh`: Runs the DM from a PDB file.
+    - `energy_binding.sh:` Runs the `gmx_MMPBSA` command to calculate the change in ΔG.
+    - `analyse_md.sh`: Calculates the RMSD, RMSF, Rg, and PCA, and places all the result files in a folder named "Files".
 
-Les scripts .mdp servent aux paramètres de la DM, et le script .in sert au paramètre de l'analyse MM_PBSA.
+.mdp scripts are used for DM settings, and the .in script is used for the MM_PBSA analysis settings.
 
-- Les fichiers Notebook servent à l'analyse des DM
-    -`Analyse_MD_traj`: Script qui définit les atomes du ligand et du recepteur, et qui cherche les pseudo-contacts pour chaques atomes du ligand définit avec ses cibles du récepteur elle ausssi bien définit.
-    -`Analyse_MD_plot_traj.ipynb`: Script qui plot les graph de densité de contacts et de l'évolution du ΔG.
-    -`Analyse_MD_plot.ipynb`: Script qui plot les graph de RMSD, RMSF, Rg, PCA...
+- Notebook files are used for analyzing homework assignments
+    - `Analyse_MD_traj`: A script that defines the atoms of the ligand and the receptor, and searches for pseudo-contacts between each defined ligand atom and its corresponding receptor targets.
+    - `Analyse_MD_plot_traj.ipynb`: Script that plots the contact density and ΔG evolution graphs.
+    - `Analyse_MD_plot.ipynb`: Script that plots graphs of RMSD, RMSF, Rg, PCA...
