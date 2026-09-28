@@ -44,11 +44,9 @@ echo -e "1\n1" | gmx rms -s frame1.pdb -f md_0_1_noPBC.xtc -o rmsd_protein.xvg -
 gmx rmsf -s frame1.pdb -f md_0_1_noPBC.xtc -o rmsf_per_residue.xvg -ox average.pdb -res <<< "1"
 # 1 = Protein (7 = MainChain+H + 8 = SideChain) ou 4 = Backbone
 
-
 # Calcul du rayon de giration par rapport à la ref
 gmx gyrate -s frame1.pdb -f md_0_1_noPBC.xtc -o gyrate.xvg <<< "1"
 # 1 = Protein (7 = MainChain+H + 8 = SideChain) ou 4 = Backbone
-
 
 
 # Analyse en composante principal d'une trajectoire MD
@@ -63,12 +61,12 @@ echo -e "4\n4" | gmx covar -s ../frame1.pdb -f ../md_0_1_noPBC.xtc -o eigenvalue
 echo -e "4\n4" | gmx anaeig -s ../frame1.pdb -f ../md_0_1_noPBC.xtc -v eigenvectors.trr -eig eigenvalues.xvg -proj proj_ev1.xvg -extr ev1.pdb -rmsf rmsf_ev1.xvg -filt trajfilt1.pdb -first 1 -last 1
 # 4 = Backbone
 
+
 # Création d'un dossier avec en copie tous les fichiers à télécharger (sauf md_0_1_noPBC.xtc...)
 cd ..
 mkdir Fichiers
 cp COVAR/eigenvalues.xvg COVAR/rmsf_ev1.xvg COVAR/ev1.pdb Fichiers/
-cp average.pdb energy.xvg error_analyse.err error_dm.err frame1.pdb gyrate.xvg md_0_1.ndx md_0_1.pdb md_0_1.gro mdout.mdp output_analyse.out output_dm.out rmsd_peptide.xvg rmsd_protein.xvg rmsd_vs_start.xvg rmsd_vs_average.xvg rmsf_per_residue.xvg Fichiers/
+cp average.pdb error_dm.err frame1.pdb gyrate.xvg md_0_1.ndx md_0_1.pdb md_0_1.gro mdout.mdp output_dm.out rmsd_peptide.xvg rmsd_protein.xvg rmsd_vs_start.xvg rmsd_vs_average.xvg rmsf_per_residue.xvg RESULTS_gmx_MMPBSA.h5 Fichiers/
 
 
 echo -e "\nanalyse de la dynamique terminée!"
-
