@@ -5,7 +5,7 @@ import re
 
 """
 Automation of "find_atoms.py", "gro_to_pdb.py", "gro_to_ndx.py" and "fix_ndx.py".
-PLEASE NOTE: This only works with TBL1R (166-514), and only if the ligand was modeled first!
+PLEASE NOTE: This only works with TBL1R WD40 domain (166-514), and only if the ligand was modeled first!
 """
 
 def find_atoms_numbers(gro_file):
@@ -142,8 +142,9 @@ def fix_ndx(ndx_file, ndx_fixed):
             f.write("\n")
     
     print(f"NDX written to: {ndx_fixed} with {len(groups)} groups.")
-    
-    
+
+
+### Main execution:
 file = "md_0_1"
 peptide_count = find_atoms_numbers(f"{file}.gro")
 
